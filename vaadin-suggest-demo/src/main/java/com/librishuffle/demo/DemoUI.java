@@ -33,15 +33,6 @@ public class DemoUI extends UI{
 
         final SuggestBox suggestBox = new CitySuggestBox();
 
-        suggestBox.addSelectionChangedListener(
-                new SelectionChangedHandler() {
-                    @Override
-                    public void onSelectionChanged(Suggestion suggestion) {
-                        Notification.show(suggestion.getDisplayString() + " selected");
-                    }
-                }
-        );
-
         Link linkToGitHub = new Link("view code on Github", new ExternalResource("https://github.com/brndnbg/VaadinSearchBox/blob/master/vaadin-suggest-demo/src/main/java/com/librishuffle/demo/CitySuggestBox.java"));
         linkToGitHub.setPrimaryStyleName("linkToGithub");
 
