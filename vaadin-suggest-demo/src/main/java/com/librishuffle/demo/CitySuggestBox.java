@@ -46,6 +46,8 @@ public class CitySuggestBox extends SuggestBox{
         //new variable with removed whitespace at start or end of query
         final String queryTrimmed = query.trim();
 
+        //this predicate will select all suggestions for cities where the cities name starts with the query term,
+        //not regarding the case
         Predicate<Suggestion> matchesQueryPredicate = new Predicate<Suggestion>() {
             @Override
             public boolean apply(Suggestion suggestion) {
