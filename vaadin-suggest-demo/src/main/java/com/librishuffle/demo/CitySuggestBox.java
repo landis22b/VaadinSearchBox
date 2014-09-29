@@ -21,10 +21,10 @@ public class CitySuggestBox extends SuggestBox{
     //this is the list of cities that a user can choose from
     private final List<Suggestion> CITY_SUGGESTIONS = ImmutableList.of(
             new Suggestion("Berlin", 1),
-            new Suggestion("Bochum", 5),
-            new Suggestion("Hamburg", 2),
-            new Suggestion("München", 3),
-            new Suggestion("Köln", 4)
+            new Suggestion("Bochum", 2),
+            new Suggestion("Hamburg", 3),
+            new Suggestion("München", 4),
+            new Suggestion("Köln", 5)
     );
 
     public CitySuggestBox(){
