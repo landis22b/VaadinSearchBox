@@ -21,10 +21,10 @@ public class CitySuggestBox extends SuggestBox{
     //this is the list of cities that a user can choose from
     private final List<Suggestion> CITY_SUGGESTIONS = ImmutableList.of(
             new Suggestion("Berlin", 1),
-            new Suggestion("Bochum", 5),
-            new Suggestion("Hamburg", 2),
-            new Suggestion("München", 3),
-            new Suggestion("Köln", 4)
+            new Suggestion("Bochum", 2),
+            new Suggestion("Hamburg", 3),
+            new Suggestion("München", 4),
+            new Suggestion("Köln", 5)
     );
 
     public CitySuggestBox(){
@@ -46,6 +46,8 @@ public class CitySuggestBox extends SuggestBox{
         //new variable with removed whitespace at start or end of query
         final String queryTrimmed = query.trim();
 
+        //this predicate will select all suggestions for cities where the cities name starts with the query term,
+        //not regarding the case
         Predicate<Suggestion> matchesQueryPredicate = new Predicate<Suggestion>() {
             @Override
             public boolean apply(Suggestion suggestion) {
@@ -53,7 +55,7 @@ public class CitySuggestBox extends SuggestBox{
             }
         };
 
-        //filter the available cities by name matching the query, limit to 5 matches and return it as an array
+        //filter the available cities by name matching the query and return it as an array
         return FluentIterable.from(CITY_SUGGESTIONS)
                 .filter(matchesQueryPredicate)
                 .toArray(Suggestion.class);
