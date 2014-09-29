@@ -9,7 +9,7 @@ mvn clean install
 cd demo
 mvn jetty:run
 
-To see the demo, navigate to http://localhost:8080/
+To see the demo, navigate to http://localhost:8080/vaadin-suggest-demo
 
 ## Development with Eclipse IDE
 
