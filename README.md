@@ -2,10 +2,6 @@
 
 SuggestBox is an UI component add-on for Vaadin 7.
 
-## Download release
-
-Official releases of this add-on are available at Vaadin Directory. For Maven instructions, download and reviews, go to http://vaadin.com/addon/vaadin-suggest
-
 ## Building and running demo
 
 git clone <url of the SuggestBox repository>
