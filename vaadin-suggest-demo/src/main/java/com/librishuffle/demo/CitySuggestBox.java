@@ -55,7 +55,7 @@ public class CitySuggestBox extends SuggestBox{
             }
         };
 
-        //filter the available cities by name matching the query, limit to 5 matches and return it as an array
+        //filter the available cities by name matching the query and return it as an array
         return FluentIterable.from(CITY_SUGGESTIONS)
                 .filter(matchesQueryPredicate)
                 .toArray(Suggestion.class);
