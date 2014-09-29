@@ -2,10 +2,6 @@
 
 SuggestBox is an UI component add-on for Vaadin 7.
 
-## Online demo
-
-Try the add-on demo at <url of the online demo>
-
 ## Download release
 
 Official releases of this add-on are available at Vaadin Directory. For Maven instructions, download and reviews, go to http://vaadin.com/addon/vaadin-suggest
@@ -48,18 +44,17 @@ The most common way of debugging and making changes to the client-side code is d
 
 Another way of debugging client-side is superdev mode. To enable it, uncomment devModeRedirectEnabled line from the end of DemoWidgetSet.gwt.xml located under vaadin-suggest-demo resources folder and compile the widgetset once by running vaadin:compile Maven target for vaadin-suggest-demo. Refresh vaadin-suggest-demo project resources by right clicking the project and choosing Refresh. Click "Create SuperDevMode Launch" button on the Vaadin tab of the vaadin-suggest-demo project properties panel to create superder mode code server launch configuration and modify the class path as instructed above. After starting the code server by running SuperDevMode launch as Java application, you can navigate to http://localhost:8080/vaadin-suggest-demo/?superdevmode. Now all code changes you do to your client side will get compiled as soon as you reload the web page. You can also access Java-sources and set breakpoints inside Chrome if you enable source maps from inspector settings. 
 
- 
 ## Release notes
 
 ### Version 1.0.0
-- ...
-- ...
+ initial functional release, 
 
 ## Roadmap
 
 This component is developed as a hobby with no public roadmap or any guarantees of upcoming releases. That said, the following features are planned for upcoming releases:
-- ...
-- ...
+- query delay function to reduce network traffic and query overhead
+- minimal query length constraint to avoid unneccessary server calls
+- stopword list for several languages
 
 ## Issue tracking
 
@@ -79,32 +74,4 @@ Contributions are welcome, but there are no guarantees that they are accepted as
 
 Add-on is distributed under Apache License 2.0. For license terms, see LICENSE.txt.
 
-SuggestBox is written by <...>
-
-# Developer Guide
-
-## Getting started
-
-Here is a simple example on how to try out the add-on component:
-
-<...>
-
-For a more comprehensive example, see src/test/java/org/vaadin/template/demo/DemoUI.java
-
-## Features
-
-### Feature A
-
-<...>
-
-### Feature B
-
-<...>
-
-### Feature C
-
-<...>
-
-## API
-
-SuggestBox JavaDoc is available online at <...>
+SuggestBox is written by Bernd Hopp
