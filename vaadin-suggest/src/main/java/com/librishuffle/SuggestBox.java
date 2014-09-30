@@ -16,8 +16,8 @@ import java.util.List;
  *            return new Suggestion[]{
  *                new Suggestion("Cat", 1),
  *                new Suggestion("Dog", 2),
- *                 new Suggestion("Horse", 3),
- *                 new Suggestion("Carnary", 4)
+ *                new Suggestion("Horse", 3),
+ *                new Suggestion("Carnary", 4)
  *            };
  *        }
  *   };
