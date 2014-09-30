@@ -29,8 +29,7 @@ import java.util.List;
  *
  * Using the example above, if the user types anything into the text widget,
  * the SuggestBox will display "Cat", "Dog", "Horse" and "Canary" suggestions.
- * Filter logic needs to be implemented here usually. If you are looking for static suggestions for
- * example a list of countries, try
+ * Filter logic needs to be implemented here usually.
  */
 public abstract class SuggestBox extends com.vaadin.ui.AbstractComponent{
 
