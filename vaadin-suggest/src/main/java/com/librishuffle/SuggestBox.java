@@ -11,9 +11,6 @@ import java.util.List;
  *
  * <pre>
  *   SuggestBox suggestBox = new SuggestBox(){
- *
- *        final String animals = new String[]{"cat", "dog", "horse", "carnary"};
- *
  *        @Override
  *        public Suggestion[] getItemSuggestions(String query) {
  *            return new Suggestion[]{
