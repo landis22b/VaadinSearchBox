@@ -11,19 +11,26 @@ import java.util.List;
  *
  * <pre>
  *   SuggestBox suggestBox = new SuggestBox(){
+ *
+ *        final String animals = new String[]{"cat", "dog", "horse", "carnary"};
+ *
  *        @Override
  *        public Suggestion[] getItemSuggestions(String query) {
- *              new Suggestion("Cat", 1),
- *              new Suggestion("Dog", 2),
- *              new Suggestion("Horse", 3),
- *              new Suggestion("Carnary", 4)
+ *            return new Suggestion[]{
+ *                new Suggestion("Cat", 1),
+ *                new Suggestion("Dog", 2),
+ *                 new Suggestion("Horse", 3),
+ *                 new Suggestion("Carnary", 4)
+ *            };
  *        }
  *   };
  *
  * </pre>
  *
- * Using the example above, if the user types "C" into the text widget,
- * the SuggestBox will display "Cat" and "Canary" suggestions.
+ * Using the example above, if the user types anything into the text widget,
+ * the SuggestBox will display "Cat", "Dog", "Horse" and "Canary" suggestions.
+ * Filter logic needs to be implemented here usually. If you are looking for static suggestions for
+ * example a list of countries, try
  */
 public abstract class SuggestBox extends com.vaadin.ui.AbstractComponent{
 
@@ -45,6 +52,11 @@ public abstract class SuggestBox extends com.vaadin.ui.AbstractComponent{
 
         @Override
         public void getSuggestions(String query) {
+
+            if(query == null || query.isEmpty()){
+                return;
+            }
+
             Suggestion[] suggestions = getItemSuggestions(query);
 
             if(suggestions == null || suggestions.length == 0){
