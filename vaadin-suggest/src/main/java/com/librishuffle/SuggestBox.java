@@ -11,7 +11,7 @@ import java.util.List;
  *
  * <pre>
  *   SuggestBox suggestBox = new SuggestBox(){
- *        @Override
+ *        {@literal @}Override
  *        public Suggestion[] getItemSuggestions(String query) {
  *            return new Suggestion[]{
  *                new Suggestion("Cat", 1),

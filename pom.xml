@@ -7,10 +7,13 @@
 	<packaging>pom</packaging>
 	<version>1.0.0</version>
 	<name>SuggestBox Add-on Root Project</name>
-
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<vaadin.version>7.6.0</vaadin.version>
+		<vaadin.plugin.version>${vaadin.version}</vaadin.plugin.version>
+	</properties>
 	<modules>
 		<module>vaadin-suggest</module>
 		<module>vaadin-suggest-demo</module>
 	</modules>
-
 </project>
