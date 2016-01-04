@@ -1,1 +1,0 @@
-$wnd.com_librishuffle_demo_DemoWidgetSet.runAsyncCallback2('A9(1667,1,wmd);_.vc=function H2b(){DTb((!wTb&&(wTb=new ITb),wTb),this.b.e)};Jgd(Vh)(2);\n//# sourceURL=com.librishuffle.demo.DemoWidgetSet-2.js\n')

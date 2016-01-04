@@ -7,13 +7,12 @@
 	<packaging>war</packaging>
 	<version>1.0.0</version>
 	<name>SuggestBox Add-on Demo</name>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<vaadin.version>7.3.1</vaadin.version>
-		<vaadin.plugin.version>${vaadin.version}</vaadin.plugin.version>
-	</properties>
-
+	<parent>
+		<groupId>com.librishuffle</groupId>
+		<artifactId>vaadin-suggest-root</artifactId>
+		<relativePath>../pom.xml</relativePath>
+		<version>1.0.0</version>
+	</parent>
     <!--     
 	<organization>
 		<name>My Name</name>
@@ -75,7 +74,7 @@
 		<dependency>
 			<groupId>com.librishuffle</groupId>
 			<artifactId>vaadin-suggest</artifactId>
-			<version>${version}</version>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin</groupId>

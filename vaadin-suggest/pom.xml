@@ -7,19 +7,20 @@
 	<packaging>jar</packaging>
 	<version>1.0.0</version>
 	<name>SuggestBox Add-on</name>
-
+	<parent>
+		<groupId>com.librishuffle</groupId>
+		<artifactId>vaadin-suggest-root</artifactId>
+		<relativePath>../pom.xml</relativePath>
+		<version>1.0.0</version>
+	</parent>
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<vaadin.version>7.4.0.alpha8</vaadin.version>
-		<vaadin.plugin.version>${vaadin.version}</vaadin.plugin.version>
-
 		<!-- ZIP Manifest fields -->
 		<Implementation-Version>${project.version}</Implementation-Version>
 		<!-- Must not change this because of the Directory -->
 		<Implementation-Title>${project.name}</Implementation-Title>
 		<Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
 		<Vaadin-License-Title>Apache License 2.0</Vaadin-License-Title>
-		<Vaadin-Addon>${artifactId}-${project.version}.jar</Vaadin-Addon>
+		<Vaadin-Addon>${project.artifactId}-${project.version}.jar</Vaadin-Addon>
 	</properties>
 
     <!--     
