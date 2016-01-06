@@ -1,6 +1,7 @@
 package com.librishuffle.shared;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class SuggestionDto implements Serializable {
 
@@ -29,5 +30,19 @@ public class SuggestionDto implements Serializable {
 
     public void setDisplayString(String displayString) {
         this.displayString = displayString;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SuggestionDto that = (SuggestionDto) o;
+        return itemId == that.itemId &&
+                Objects.equals(displayString, that.displayString);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(itemId, displayString);
     }
 }
