@@ -2,7 +2,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.librishuffle</groupId>
 	<artifactId>vaadin-suggest</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0.0</version>
@@ -23,16 +22,15 @@
 		<Vaadin-Addon>${project.artifactId}-${project.version}.jar</Vaadin-Addon>
 	</properties>
 
-    <!--     
 	<organization>
-		<name>My Name</name>
-		<url>https://github.com/mygithubaccount/SuggestBox/</url>
+		<name>Bernd Hopp</name>
+		<url>https://github.com/berndhopp/VaadinSearchBox</url>
 	</organization>
     
 	<scm>
-		<url>git://github.com/mygithubaccount/SuggestBox.git</url>
-		<connection>scm:git:git://github.com/mygithubaccount/SuggestBox.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com:/mygithubaccount/${ComponentClassName}.git</developerConnection>
+		<url>git://github.com/berndhopp/SuggestBox.git</url>
+		<connection>scm:git:git://github.com/berndhopp/VaadinSearchBox.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com:/github.com/berndhopp/VaadinSearchBox.git</developerConnection>
 		<tag>SuggestBox add-on for Vaadin</tag>
 	</scm>
 
@@ -40,7 +38,6 @@
 		<system>GitHub</system>
 		<url>https://github.com/mygithubaccount/SuggestBox/issues</url>
 	</issueManagement>
-    -->
 
 	<licenses>
 		<license>
@@ -83,6 +80,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-push</artifactId>
+			<version>${vaadin.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-server</artifactId>
 			<version>${vaadin.version}</version>
 		</dependency>
@@ -92,8 +94,12 @@
 			<version>${vaadin.version}</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava-gwt</artifactId>
+			<version>19.0</version>
+		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 
@@ -197,7 +203,5 @@
 				<directory>src/main/resources</directory>
 			</resource>
 		</resources>
-		
 	</build>
-
 </project>

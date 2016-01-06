@@ -1,5 +1,5 @@
 package com.librishuffle.client;
 
 public interface SelectionChangedHandler {
-    void onSelectionChanged(Suggestion suggestion);
+    void onSelectionChanged(ItemSuggestion itemSuggestion);
 }

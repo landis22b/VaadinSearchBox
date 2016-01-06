@@ -5,6 +5,7 @@ import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.user.client.ui.SuggestOracle;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.client.communication.RpcProxy;
+import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.ui.AbstractComponentConnector;
 import com.vaadin.shared.ui.Connect;
 
@@ -23,18 +24,30 @@ public class SuggestBoxConnector extends AbstractComponentConnector{
                 new SelectionHandler<SuggestOracle.Suggestion>() {
                     @Override
                     public void onSelection(SelectionEvent<SuggestOracle.Suggestion> event) {
-                        Suggestion suggestion = (Suggestion)event.getSelectedItem();
-
-                        if(suggestion == null) {
+                        if(!(event.getSelectedItem() instanceof ItemSuggestion)){
                             return;
                         }
 
-                        getRpc().selectionChanged(suggestion);
+                        ItemSuggestion itemSuggestion = (ItemSuggestion)event.getSelectedItem();
+
+                        if(itemSuggestion == null) {
+                            return;
+                        }
+
+                        getRpc().selectionChanged(itemSuggestion.getItemId());
                     }
                 }
         );
 
         return searchBoxWidget;
+    }
+
+    @Override
+    public void onStateChanged(StateChangeEvent stateChangeEvent) {
+        super.onStateChanged(stateChangeEvent);
+        SuggestBoxState state = getState();
+
+        getWidget().getValueBox().getElement().setAttribute("placeHolder", state.placeHolderText);
     }
 
     @Override
@@ -49,10 +62,6 @@ public class SuggestBoxConnector extends AbstractComponentConnector{
 
     public void register(SuggestBoxClientRpc suggestBoxClientRpc){
         registerRpc(SuggestBoxClientRpc.class, suggestBoxClientRpc);
-    }
-
-    public void unregister(SuggestBoxClientRpc suggestBoxClientRpc){
-        unregisterRpc(SuggestBoxClientRpc.class, suggestBoxClientRpc);
     }
 
     public SuggestBoxServerRpc getRpc() {

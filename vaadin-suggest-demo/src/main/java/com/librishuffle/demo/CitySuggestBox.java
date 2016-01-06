@@ -1,15 +1,15 @@
 package com.librishuffle.demo;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.FluentIterable;
-import com.google.common.collect.ImmutableList;
-import com.librishuffle.SuggestBox;
-import com.librishuffle.client.SelectionChangedHandler;
-import com.librishuffle.client.Suggestion;
-import com.vaadin.ui.Notification;
-import org.apache.commons.lang3.StringUtils;
+import com.google.common.collect.ImmutableSet;
 
-import java.util.List;
+import com.librishuffle.SuggestBox;
+import com.librishuffle.shared.SuggestionDto;
+import com.vaadin.ui.Notification;
+
+import java.util.Set;
+
+import static com.vaadin.ui.Notification.Type.TRAY_NOTIFICATION;
+import static java.util.stream.Collectors.toSet;
 
 /**
  * @author Bernd Hopp
@@ -18,46 +18,38 @@ import java.util.List;
  * */
 public class CitySuggestBox extends SuggestBox{
 
+    public CitySuggestBox(){
+        super("german cities here", 800, 1);
+    }
+
     //this is the list of cities that a user can choose from
-    private final List<Suggestion> CITY_SUGGESTIONS = ImmutableList.of(
-            new Suggestion("Berlin", 1),
-            new Suggestion("Bochum", 2),
-            new Suggestion("Hamburg", 3),
-            new Suggestion("München", 4),
-            new Suggestion("Köln", 5)
+    private final Set<SuggestionDto> CITY_SUGGESTIONS = ImmutableSet.of(
+            new SuggestionDto(1, "Berlin"),
+            new SuggestionDto(2, "Bochum"),
+            new SuggestionDto(3, "Hamburg"),
+            new SuggestionDto(4, "München"),
+            new SuggestionDto(5, "Köln")
     );
 
-    public CitySuggestBox(){
+    @Override
+    protected Set<SuggestionDto> getSuggestions(String query) {
 
-        //show user selections in a notification-popup
-        addSelectionChangedListener(
-                new SelectionChangedHandler() {
-                    @Override
-                    public void onSelectionChanged(Suggestion suggestion) {
-                        Notification.show(suggestion.getDisplayString() + " selected");
-                    }
-                }
-        );
+        final String queryLower = query.toLowerCase();
+
+        return CITY_SUGGESTIONS
+                .stream()
+                .filter(suggestion -> suggestion.getDisplayString().toLowerCase().contains(queryLower))
+                .collect(toSet());
     }
 
     @Override
-    public Suggestion[] getItemSuggestions(String query) {
+    public void selectionChanged(int itemId) {
+        SuggestionDto citySuggestion = CITY_SUGGESTIONS
+                                                .stream()
+                                                .filter(suggestion -> suggestion.getItemId() == itemId)
+                                                .findFirst()
+                                                .get();
 
-        //new variable with removed whitespace at start or end of query
-        final String queryTrimmed = query.trim();
-
-        //this predicate will select all suggestions for cities where the cities name starts with the query term,
-        //not regarding the case
-        Predicate<Suggestion> matchesQueryPredicate = new Predicate<Suggestion>() {
-            @Override
-            public boolean apply(Suggestion suggestion) {
-                return StringUtils.startsWithIgnoreCase(suggestion.getDisplayString(), queryTrimmed);
-            }
-        };
-
-        //filter the available cities by name matching the query and return it as an array
-        return FluentIterable.from(CITY_SUGGESTIONS)
-                .filter(matchesQueryPredicate)
-                .toArray(Suggestion.class);
+        Notification.show("selected " + citySuggestion.getDisplayString(), TRAY_NOTIFICATION);
     }
 }

@@ -1,8 +1,7 @@
 package com.librishuffle.demo;
 
 import com.librishuffle.SuggestBox;
-import com.librishuffle.client.SelectionChangedHandler;
-import com.librishuffle.client.Suggestion;
+import com.vaadin.annotations.Push;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -15,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 
 @Theme("demo")
 @Title("SuggestBox Add-on Demo")
+@Push()
 @SuppressWarnings("serial, unused")
 public class DemoUI extends UI{
     @WebServlet(value = "/*", asyncSupported = true)
@@ -29,21 +29,14 @@ public class DemoUI extends UI{
 
         layout.setSizeFull();
 
-        Label label = new Label("City:  ");
-
         final SuggestBox suggestBox = new CitySuggestBox();
-
-        Link linkToGitHub = new Link("view code on Github", new ExternalResource("https://github.com/brndnbg/VaadinSearchBox/blob/master/vaadin-suggest-demo/src/main/java/com/librishuffle/demo/CitySuggestBox.java"));
-        linkToGitHub.setPrimaryStyleName("linkToGithub");
 
         Layout suggestBoxLabelContainer = new HorizontalLayout();
 
-        suggestBoxLabelContainer.addComponent(label);
         suggestBoxLabelContainer.addComponent(suggestBox);
 
         layout.addComponent(suggestBoxLabelContainer);
         layout.setComponentAlignment(suggestBoxLabelContainer, Alignment.MIDDLE_CENTER);
-        layout.addComponent(linkToGitHub);
         setContent(layout);
     }
 }

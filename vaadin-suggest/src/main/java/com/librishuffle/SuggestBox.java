@@ -1,9 +1,14 @@
 package com.librishuffle;
 
-import com.librishuffle.client.*;
+import com.librishuffle.client.SuggestBoxClientRpc;
+import com.librishuffle.client.SuggestBoxServerRpc;
+import com.librishuffle.client.SuggestBoxState;
+import com.librishuffle.shared.SuggestionDto;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
+
+import static com.google.gwt.thirdparty.guava.common.base.Preconditions.checkArgument;
+import static com.google.gwt.thirdparty.guava.common.base.Strings.isNullOrEmpty;
 
 /**
  * A {@link SuggestBox} is a text box which displays a
@@ -12,12 +17,12 @@ import java.util.List;
  * <pre>
  *   SuggestBox suggestBox = new SuggestBox(){
  *        {@literal @}Override
- *        public Suggestion[] getItemSuggestions(String query) {
- *            return new Suggestion[]{
- *                new Suggestion("Cat", 1),
- *                new Suggestion("Dog", 2),
- *                new Suggestion("Horse", 3),
- *                new Suggestion("Carnary", 4)
+ *        public ItemSuggestion[] getItemSuggestions(String query) {
+ *            return new ItemSuggestion[]{
+ *                new ItemSuggestion("Cat", 1),
+ *                new ItemSuggestion("Dog", 2),
+ *                new ItemSuggestion("Horse", 3),
+ *                new ItemSuggestion("Carnary", 4)
  *            };
  *        }
  *   };
@@ -28,45 +33,40 @@ import java.util.List;
  * the SuggestBox will display "Cat", "Dog", "Horse" and "Canary" suggestions.
  * Filter logic needs to be implemented here usually.
  */
-public abstract class SuggestBox extends com.vaadin.ui.AbstractComponent{
+public abstract class SuggestBox extends com.vaadin.ui.AbstractComponent implements SuggestBoxServerRpc{
 
-    public SuggestBox() {
-        registerRpc(new SuggestBoxServerRpcImpl());
+    public SuggestBox(){
+        this("type query here", 800, 4);
     }
 
-    public abstract Suggestion[] getItemSuggestions(String query);
+    public SuggestBox(String placeHolderText, int delayMilis, int queryMinLength) {
+        checkArgument(!isNullOrEmpty(placeHolderText));
+        checkArgument(delayMilis >= 0);
+        checkArgument(queryMinLength >= 0);
 
-    private final List<SelectionChangedHandler> selectionChangedHandlers = new ArrayList<SelectionChangedHandler>();
-
-    public void addSelectionChangedListener(SelectionChangedHandler handler){
-        selectionChangedHandlers.add(handler);
+        registerRpc(this);
+        SuggestBoxState state = getState();
+        state.placeHolderText = placeHolderText;
+        state.delayMilis = delayMilis;
+        state.queryMinLength = queryMinLength;
     }
 
-    private class SuggestBoxServerRpcImpl implements SuggestBoxServerRpc {
+    private final SuggestBoxClientRpc clientRpc = getRpcProxy(SuggestBoxClientRpc.class);
 
-        private final SuggestBoxClientRpc clientRpc = getRpcProxy(SuggestBoxClientRpc.class);
+    @Override
+    protected SuggestBoxState getState() {
+        return (SuggestBoxState)super.getState();
+    }
 
-        @Override
-        public void getSuggestions(String query) {
+    protected abstract Set<SuggestionDto> getSuggestions(String query);
 
-            if(query == null || query.isEmpty()){
-                return;
-            }
+    @Override
+    public void suggestFor(String query) {
 
-            Suggestion[] suggestions = getItemSuggestions(query);
+        checkArgument(!isNullOrEmpty(query));
 
-            if(suggestions == null || suggestions.length == 0){
-                return;
-            }
+        Set<SuggestionDto> suggestionDtos = getSuggestions(query);
 
-            clientRpc.showSuggestions(suggestions);
-        }
-
-        @Override
-        public void selectionChanged(Suggestion suggestion) {
-            for(SelectionChangedHandler handler: selectionChangedHandlers){
-                handler.onSelectionChanged(suggestion);
-            }
-        }
+        clientRpc.showSuggestions(query, suggestionDtos.toArray(new SuggestionDto[suggestionDtos.size()]));
     }
 }

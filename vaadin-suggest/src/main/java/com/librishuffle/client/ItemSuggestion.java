@@ -1,15 +1,18 @@
 package com.librishuffle.client;
 
 import com.google.gwt.user.client.ui.SuggestOracle;
+
+import com.librishuffle.shared.SuggestionDto;
+
 import java.io.Serializable;
 
-public class Suggestion implements SuggestOracle.Suggestion, Serializable{
-    public Suggestion(){
+public class ItemSuggestion implements SuggestOracle.Suggestion, Serializable{
+    public ItemSuggestion(){
     }
     
-    public Suggestion(String displayString, int itemId){
-        this.displayString = displayString;
-        this.itemId = itemId;
+    public ItemSuggestion(SuggestionDto suggestionDto){
+        this.displayString = suggestionDto.getDisplayString();
+        this.itemId = suggestionDto.getItemId();
     }
     
     private String displayString;
