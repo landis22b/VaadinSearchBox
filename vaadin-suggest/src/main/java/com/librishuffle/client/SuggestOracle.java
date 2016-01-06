@@ -87,6 +87,10 @@ public class SuggestOracle extends com.google.gwt.user.client.ui.SuggestOracle i
             return;
         }
 
+        if(!suggestBoxConnector.getWidget().getText().equals(originalQuery)){
+            return;
+        }
+
         Set<Suggestion> suggestions = new HashSet<Suggestion>(suggestionDtos.length);
 
         for (SuggestionDto suggestionDto : suggestionDtos) {

@@ -5,7 +5,7 @@
 	<groupId>com.librishuffle</groupId>
 	<artifactId>vaadin-suggest-root</artifactId>
 	<packaging>pom</packaging>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 	<name>SuggestBox Add-on Root Project</name>
 	<modules>
 		<module>vaadin-suggest</module>
