@@ -17,16 +17,19 @@ import static com.google.gwt.thirdparty.guava.common.base.Strings.isNullOrEmpty;
  * <pre>
  *   SuggestBox suggestBox = new SuggestBox(){
  *        {@literal @}Override
- *        public ItemSuggestion[] getItemSuggestions(String query) {
- *            return new ItemSuggestion[]{
- *                new ItemSuggestion("Cat", 1),
- *                new ItemSuggestion("Dog", 2),
- *                new ItemSuggestion("Horse", 3),
- *                new ItemSuggestion("Carnary", 4)
- *            };
+ *        public Set{@literal <}SuggestionDto{@literal >} getItemSuggestions(String query) {
+ *            return ImmutableSet.of(
+ *                new SuggestionDto(1, "Cat"),
+ *                new SuggestionDto(2, "Dog"),
+ *                new SuggestionDto(3, "Horse"),
+ *                new SuggestionDto(4, "Carnary")
+ *            );
  *        }
- *   };
  *
+ *        {@literal @}Override
+ *        public void selectionChanged(int itemId) {
+ *          //handle selection here
+ *        };
  * </pre>
  *
  * Using the example above, if the user types anything into the text widget,
