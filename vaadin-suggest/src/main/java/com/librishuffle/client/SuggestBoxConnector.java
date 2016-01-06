@@ -18,7 +18,7 @@ public class SuggestBoxConnector extends AbstractComponentConnector{
     protected Widget createWidget(){
         final SuggestOracle oracle = new com.librishuffle.client.SuggestOracle(this);
 
-        com.google.gwt.user.client.ui.SuggestBox searchBoxWidget = new com.google.gwt.user.client.ui.SuggestBox(oracle);
+        final com.google.gwt.user.client.ui.SuggestBox searchBoxWidget = new com.google.gwt.user.client.ui.SuggestBox(oracle);
 
         searchBoxWidget.addSelectionHandler(
                 new SelectionHandler<SuggestOracle.Suggestion>() {
@@ -35,6 +35,8 @@ public class SuggestBoxConnector extends AbstractComponentConnector{
                         }
 
                         getRpc().selectionChanged(itemSuggestion.getItemId());
+
+                        searchBoxWidget.setText("");
                     }
                 }
         );
