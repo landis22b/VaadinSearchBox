@@ -9,26 +9,15 @@
 		<groupId>com.librishuffle</groupId>
 		<artifactId>vaadin-suggest-root</artifactId>
 		<relativePath>../pom.xml</relativePath>
-		<version>1.0.1</version>
+		<version>1.0.2</version>
 	</parent>
-    <!--     
-	<organization>
-		<name>My Name</name>
-		<url>https://github.com/mygithubaccount/SuggestBox/</url>
-	</organization>
-    
-	<scm>
-		<url>git://github.com/mygithubaccount/SuggestBox.git</url>
-		<connection>scm:git:git://github.com/mygithubaccount/SuggestBox.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com:/mygithubaccount/${ComponentClassName}.git</developerConnection>
-		<tag>SuggestBox add-on for Vaadin</tag>
-	</scm>
-
-	<issueManagement>
-		<system>GitHub</system>
-		<url>https://github.com/mygithubaccount/SuggestBox/issues</url>
-	</issueManagement>
-    -->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.version>1.0.2</project.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<vaadin.version>7.6.0</vaadin.version>
+		<vaadin.plugin.version>${vaadin.version}</vaadin.plugin.version>
+	</properties>
 
 	<licenses>
 		<license>
@@ -70,14 +59,9 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.librishuffle</groupId>
-			<artifactId>vaadin-suggest</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>com.vaadin</groupId>
-			<artifactId>vaadin-push</artifactId>
-			<version>${vaadin.version}</version>
+			<artifactId>vaadin-suggest</artifactId>
+			<version>1.0.2</version>
 		</dependency>
 		<dependency>
 			<groupId>com.vaadin</groupId>
@@ -105,7 +89,17 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.3.2</version>
         </dependency>
-    </dependencies>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-suggest</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin-suggest</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>

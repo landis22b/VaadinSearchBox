@@ -1,7 +1,6 @@
 package com.librishuffle.demo;
 
 import com.librishuffle.SuggestBox;
-import com.vaadin.annotations.Push;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -14,7 +13,6 @@ import javax.servlet.annotation.WebServlet;
 
 @Theme("demo")
 @Title("SuggestBox Add-on Demo")
-@Push()
 @SuppressWarnings("serial, unused")
 public class DemoUI extends UI{
     @WebServlet(value = "/*", asyncSupported = true)
