@@ -36,7 +36,9 @@ public class SuggestBoxConnector extends AbstractComponentConnector{
 
                         getRpc().selectionChanged(itemSuggestion.getItemId());
 
-                        searchBoxWidget.setText("");
+                        if(getState().clearInputAfterSelection){
+                            searchBoxWidget.setText("");
+                        }
                     }
                 }
         );

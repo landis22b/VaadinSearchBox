@@ -39,19 +39,35 @@ import static com.google.gwt.thirdparty.guava.common.base.Strings.isNullOrEmpty;
 public abstract class SuggestBox extends com.vaadin.ui.AbstractComponent implements SuggestBoxServerRpc{
 
     public SuggestBox(){
-        this("type query here", 800, 4);
+        this("type query here", 800, 4, true);
     }
 
+    /**
+     @param placeHolderText a text to be displayed when the box is empty, usually something like 'type your query here'
+     @param delayMilis the miliseconds to wait for the user to type until a request for suggestions is send to the server
+     @param queryMinLength the minimum length of a query to have to request suggestions
+      * */
     public SuggestBox(String placeHolderText, int delayMilis, int queryMinLength) {
+        this(placeHolderText, delayMilis, queryMinLength, true);
+    }
+
+    /**
+     @param placeHolderText a text to be displayed when the box is empty, usually something like 'type your query here'
+     @param delayMilis the miliseconds to wait for the user to type until a request for suggestions is send to the server
+     @param queryMinLength the minimum length of a query to have to request suggestions
+     @param clearInputAfterSelection set to true if the box should be empty after an suggestion was selected
+    * */
+    public SuggestBox(String placeHolderText, int delayMilis, int queryMinLength, boolean clearInputAfterSelection) {
         checkArgument(!isNullOrEmpty(placeHolderText));
         checkArgument(delayMilis >= 0);
-        checkArgument(queryMinLength >= 0);
+        checkArgument(queryMinLength >= 1);
 
         registerRpc(this);
         SuggestBoxState state = getState();
         state.placeHolderText = placeHolderText;
         state.delayMilis = delayMilis;
         state.queryMinLength = queryMinLength;
+        state.clearInputAfterSelection = clearInputAfterSelection;
     }
 
     private final SuggestBoxClientRpc clientRpc = getRpcProxy(SuggestBoxClientRpc.class);
