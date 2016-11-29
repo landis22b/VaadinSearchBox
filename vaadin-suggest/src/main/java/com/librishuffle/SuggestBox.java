@@ -1,5 +1,7 @@
 package com.librishuffle;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Strings.isNullOrEmpty;
 import com.librishuffle.client.SuggestBoxClientRpc;
 import com.librishuffle.client.SuggestBoxServerRpc;
 import com.librishuffle.client.SuggestBoxState;
@@ -7,12 +9,9 @@ import com.librishuffle.shared.SuggestionDto;
 
 import java.util.Set;
 
-import static com.google.gwt.thirdparty.guava.common.base.Preconditions.checkArgument;
-import static com.google.gwt.thirdparty.guava.common.base.Strings.isNullOrEmpty;
-
 /**
- * A {@link SuggestBox} is a text box which displays a
- * set of selections that match the user's input.
+ * A {@link SuggestBox} is a text box which displays a set of selections that
+ * match the user's input.
  *
  * <pre>
  *   SuggestBox suggestBox = new SuggestBox(){
@@ -32,31 +31,40 @@ import static com.google.gwt.thirdparty.guava.common.base.Strings.isNullOrEmpty;
  *        };
  * </pre>
  *
- * Using the example above, if the user types anything into the text widget,
- * the SuggestBox will display "Cat", "Dog", "Horse" and "Canary" suggestions.
+ * Using the example above, if the user types anything into the text widget, the
+ * SuggestBox will display "Cat", "Dog", "Horse" and "Canary" suggestions.
  * Filter logic needs to be implemented here usually.
  */
-public abstract class SuggestBox extends com.vaadin.ui.AbstractComponent implements SuggestBoxServerRpc{
+public abstract class SuggestBox extends com.vaadin.ui.AbstractComponent implements SuggestBoxServerRpc {
 
-    public SuggestBox(){
+    public SuggestBox() {
         this("type query here", 800, 4, true);
     }
 
     /**
-     @param placeHolderText a text to be displayed when the box is empty, usually something like 'type your query here'
-     @param delayMilis the miliseconds to wait for the user to type until a request for suggestions is send to the server
-     @param queryMinLength the minimum length of a query to have to request suggestions
-      * */
+     * @param placeHolderText a text to be displayed when the box is empty,
+     * usually something like 'type your query here'
+     * @param delayMilis the miliseconds to wait for the user to type until a
+     * request for suggestions is send to the server
+     * @param queryMinLength the minimum length of a query to have to request
+     * suggestions
+     *
+     */
     public SuggestBox(String placeHolderText, int delayMilis, int queryMinLength) {
         this(placeHolderText, delayMilis, queryMinLength, true);
     }
 
     /**
-     @param placeHolderText a text to be displayed when the box is empty, usually something like 'type your query here'
-     @param delayMilis the miliseconds to wait for the user to type until a request for suggestions is send to the server
-     @param queryMinLength the minimum length of a query to have to request suggestions
-     @param clearInputAfterSelection set to true if the box should be empty after an suggestion was selected
-    * */
+     * @param placeHolderText a text to be displayed when the box is empty,
+     * usually something like 'type your query here'
+     * @param delayMilis the miliseconds to wait for the user to type until a
+     * request for suggestions is send to the server
+     * @param queryMinLength the minimum length of a query to have to request
+     * suggestions
+     * @param clearInputAfterSelection set to true if the box should be empty
+     * after an suggestion was selected
+     *
+     */
     public SuggestBox(String placeHolderText, int delayMilis, int queryMinLength, boolean clearInputAfterSelection) {
         checkArgument(!isNullOrEmpty(placeHolderText));
         checkArgument(delayMilis >= 0);
@@ -74,7 +82,7 @@ public abstract class SuggestBox extends com.vaadin.ui.AbstractComponent impleme
 
     @Override
     protected SuggestBoxState getState() {
-        return (SuggestBoxState)super.getState();
+        return (SuggestBoxState) super.getState();
     }
 
     protected abstract Set<SuggestionDto> getSuggestions(String query);
